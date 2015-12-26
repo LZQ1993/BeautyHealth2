@@ -28,8 +28,9 @@
                 <ImageView
                     android:id="@+id/iv_brieflypic"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
                     android:layout_height="200dp"
-                    android:background="@mipmap/hy_info_item_pic" />
+                    />
             </LinearLayout>
 
             <LinearLayout

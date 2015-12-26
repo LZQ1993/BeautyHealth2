@@ -7,6 +7,8 @@ import android.widget.TextView;
 import com.Entity.AdvertisementInfo;
 import com.beautyhealthapp.R;
 import com.infrastructure.CWActivity.DataRequestActivity;
+import com.infrastructure.CWDataRequest.NetworkSetInfo;
+import com.infrastructure.CWUtilities.LoadPicTask;
 
 /**
  * Created by lenovo on 2015/12/25.
@@ -39,9 +41,16 @@ public class FavorableInfoActivity extends DataRequestActivity {
         tv_adTitle.setText(advertisementInfo.AdTitle);
         tv_publicTime = (TextView) findViewById(R.id.tv_publicTime);
         tv_publicTime.setText(advertisementInfo.PublishTime);
-
         iv_brieflypic = (ImageView) findViewById(R.id.iv_brieflypic);
-
+        String path = advertisementInfo.brieflyImgUrl;
+        LoadPicTask advertisementDetiallpt = new LoadPicTask(iv_brieflypic);
+        advertisementDetiallpt.setDefaultPic(R.mipmap.hy_info_item_pic);
+        if (path.length() > 0) {
+            String webaddrss = NetworkSetInfo.getServiceUrl()+path.substring(2, advertisementInfo.brieflyImgUrl.length());
+            advertisementDetiallpt.execute(webaddrss);
+        }else{
+            iv_brieflypic.setImageResource(R.mipmap.hy_info_item_pic);
+        }
     }
 
 }
