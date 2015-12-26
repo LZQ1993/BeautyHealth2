@@ -1,11 +1,90 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/activity_main_navbar" />
 
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/id_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp">
+
+        <RadioButton
+            android:id="@+id/btn4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:button="@null"
+            android:checked="true"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/selector_main"
+            android:gravity="center"
+            android:text="首页"
+            android:textColor="@drawable/selector_color"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/btn3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:button="@null"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/selector_vip"
+            android:gravity="center"
+            android:text="会员中心"
+            android:textColor="@drawable/selector_color"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/btn2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:button="@null"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/selector_doc"
+            android:gravity="center"
+            android:text="绿色就医"
+            android:textColor="@drawable/selector_color"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/btn1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:button="@null"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/selector_me"
+            android:gravity="center"
+            android:text="我"
+            android:textColor="@drawable/selector_color"
+            android:textSize="12sp" />
+    </RadioGroup>
+
+</LinearLayout>
