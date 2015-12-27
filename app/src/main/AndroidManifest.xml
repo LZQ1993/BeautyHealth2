@@ -42,7 +42,7 @@
 
     <application
         android:allowBackup="true"
-        android:name="com.infrastructure.CWComponent.App"
+        android:name="com.beautyhealthapp.Assistant.App"
         android:icon="@mipmap/companyicon"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Light.NoTitleBar" >

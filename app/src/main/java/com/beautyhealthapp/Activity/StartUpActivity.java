@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.Entity.Ad;
+import com.Entity.BluetoothState;
 import com.beautyhealthapp.R;
 import com.infrastructure.CWActivity.DataRequestActivity;
 import com.infrastructure.CWComponent.AppInfo;
@@ -24,6 +25,7 @@ import com.infrastructure.CWSqliteManager.SqliteHelper;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,12 +39,13 @@ public class StartUpActivity extends DataRequestActivity {
     private ImageView ad;
     private IFileSystem myfilesystem;
     public String localPath;
-    private String currentNotiName="LoadingPicNotifications";
+    private String currentNotiName = "LoadingPicNotifications";
     private LoadImage load;
     private String webaddress;
     private String filename;
     private long size;
     private int resultflag;
+    private BluetoothAdapter bluetoothAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +54,7 @@ public class StartUpActivity extends DataRequestActivity {
         reqWidth = wm.getDefaultDisplay().getWidth();
         reqHeight = wm.getDefaultDisplay().getHeight();
         appInfo = new AppInfo(getApplicationContext());
-        parentView = getLayoutInflater().inflate(R.layout.activity_startup,
-                null);
+        parentView = getLayoutInflater().inflate(R.layout.activity_startup,null);
         ad = (ImageView) parentView.findViewById(R.id.imageView1);
         myfilesystem = new LocalFileSystem(getApplicationContext());
         localPath = myfilesystem.getLocalPath();
@@ -61,30 +63,38 @@ public class StartUpActivity extends DataRequestActivity {
             getadimage();
         }
         setContentView(parentView);
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
+        List<Object> ls = iSqlHelper.Query("com.Entity.BluetoothState", null);
+        if (ls.size() > 0) {
+            BluetoothState bs = (BluetoothState) ls.get(0);
+            if (bs.State.equals("1")) {
+                bluetoothAdapter.enable();
+            } else {
+                bluetoothAdapter.disable();
+            }
+        } else {
+            bluetoothAdapter.disable();
+        }
         new Thread() {
             public void run() {
-
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-                ISqlHelper iSqlHelper = new SqliteHelper(null,getApplicationContext());
                 Intent intent = new Intent();
                 if (appInfo.isNewVersion()) {
-                    iSqlHelper.CreateTable("com.Entity.UserMessage");
-                    iSqlHelper.CreateTable("com.Entity.UserLocal");
                     intent.setClass(StartUpActivity.this, IntroActivity.class);
                     intent.putExtra("goto", LoginActivity.class.getName());
                     AppInfo.markCurrentVersion();
                     startActivity(intent);
                     finish();
                 } else {
-                        intent.setClass(StartUpActivity.this,LoginActivity.class);
-                        intent.putExtra("goto",MainActivity.class.getName());
-                        startActivity(intent);
-                        finish();
+                    intent.setClass(StartUpActivity.this, LoginActivity.class);
+                    intent.putExtra("goto", MainActivity.class.getName());
+                    startActivity(intent);
+                    finish();
                 }
             }
         }.start();
@@ -104,6 +114,7 @@ public class StartUpActivity extends DataRequestActivity {
         setRequestUtility(myru);
         requestData();
     }
+
     @Override
     public void updateView() {
         if (result != null) {
@@ -120,15 +131,15 @@ public class StartUpActivity extends DataRequestActivity {
                             size = Long.parseLong(msg.getSize());
                         }
                         updateImageShow();
-                    }else {
+                    } else {
                         ad.setImageResource(R.mipmap.app_startup);
                     }
                 }
-            }else{
-                DefaultTip(StartUpActivity.this,"数据解析失败");
+            } else {
+                DefaultTip(StartUpActivity.this, "数据解析失败");
             }
-        }else{
-            DefaultTip(StartUpActivity.this,"网络获取数据失败");
+        } else {
+            DefaultTip(StartUpActivity.this, "网络获取数据失败");
         }
     }
 
@@ -181,12 +192,12 @@ public class StartUpActivity extends DataRequestActivity {
                     if (filename.trim().toLowerCase().endsWith(".jpg")
                             || filename.trim().toLowerCase()
                             .endsWith(".png")) {
-                        ad.setImageBitmap(ImageCal.decodeSampledBitmapFromResource(localPath+ File.separator + filename,
-                                        reqWidth, reqHeight));
+                        ad.setImageBitmap(ImageCal.decodeSampledBitmapFromResource(localPath + File.separator + filename,
+                                reqWidth, reqHeight));
                     } else {
                         ad.setImageResource(R.mipmap.app_startup);
                     }
-                }else{
+                } else {
                     ad.setImageResource(R.mipmap.app_startup);
                 }
             }
@@ -198,6 +209,7 @@ public class StartUpActivity extends DataRequestActivity {
 
     @Override
     public void onBackPressed() {
+        bluetoothAdapter.disable();
         finish();
     }
 

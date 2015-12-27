@@ -1,6 +1,7 @@
 package com.beautyhealthapp.Activity;
 
 
+import android.bluetooth.BluetoothAdapter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -79,6 +80,8 @@ public class MainActivity extends FragmentActivity {
             } else {
                 ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
                 iSqlHelper.SQLExec("delete from UserMessage");// 删除表中原有的数据，保证只有一条
+                BluetoothAdapter bluetoothAdapter= BluetoothAdapter.getDefaultAdapter();
+                bluetoothAdapter.disable();
                 finish();
                 System.exit(0); // 凡是非零都表示异常退出!0表示正常退出!
             }

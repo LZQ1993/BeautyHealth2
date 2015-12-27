@@ -171,8 +171,8 @@ public class SqliteHelper implements ISqlHelper{
         		 for ( int i = 0 ; i < fields. length ; i++){
                      Field f = fields[i];
                      String FieldName=f.getName();
-                     f.setAccessible( true ); // ����Щ�����ǿ��Է��ʵ�
-                     String type = f.getType().toString(); // �õ������Ե�����
+                     f.setAccessible( true );
+                     String type = f.getType().toString();
                      if (type.endsWith("String")) {
                         try {
     						f.set(objectCopy, curesor.getString(curesor.getColumnIndex(FieldName))) ;
