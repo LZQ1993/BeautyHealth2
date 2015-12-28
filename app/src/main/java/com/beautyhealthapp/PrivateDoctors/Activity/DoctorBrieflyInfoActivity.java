@@ -74,6 +74,7 @@ public class DoctorBrieflyInfoActivity extends DataRequestActivity implements IX
         showProgressDialog(DoctorBrieflyInfoActivity.this, "加载中，请稍候...");
         initData();
     }
+
     @Override
     public void onRefresh() {
         initData();
@@ -95,6 +96,7 @@ public class DoctorBrieflyInfoActivity extends DataRequestActivity implements IX
         listview.stopLoadMore();
         listview.setRefreshTime("刚刚");
     }
+
     private void initData() {
         RequestUtility myru = new RequestUtility();
         myru.setIP(null);

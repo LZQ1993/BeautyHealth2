@@ -18,4 +18,8 @@
     <string name="xlistview_header_last_time">上次更新时间：</string>
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
+
+    <string name="userbackinfo_contenttip">   我们很乐意分享您的感受,欢迎提出意见和建议,我们会认真对待您的反馈,感谢您的关注和支持.</string>
+    <string name="userbackinfo_headertip">尊敬的客户，您好!</string>
+
 </resources>
