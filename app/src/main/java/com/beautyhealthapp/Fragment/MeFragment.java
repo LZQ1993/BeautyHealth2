@@ -16,6 +16,7 @@ import com.beautyhealthapp.CallCenter.Activity.CallCenterActivity;
 import com.beautyhealthapp.R;
 import com.beautyhealthapp.UserCenter.BindUserActivity;
 import com.beautyhealthapp.UserCenter.UserBackInfoActivity;
+import com.beautyhealthapp.UserCenter.UserManagerActivity;
 import com.infrastructure.CWFragment.DataRequestFragment;
 import com.infrastructure.CWSqliteManager.ISqlHelper;
 import com.infrastructure.CWSqliteManager.SqliteHelper;
@@ -101,7 +102,7 @@ public class MeFragment extends DataRequestFragment implements OnClickListener{
                 jumpActivity(CallCenterActivity.class);
                 break;
             case R.id.tr_userManger:
-                jumpActivity(CallCenterActivity.class);
+                jumpActivity(UserManagerActivity.class);
                 break;
             case R.id.tr_personInfo:
                 IsLoginTip(CallCenterActivity.class);
