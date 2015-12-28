@@ -14,7 +14,8 @@ import android.widget.TextView;
 import com.Entity.BluetoothState;
 import com.beautyhealthapp.CallCenter.Activity.CallCenterActivity;
 import com.beautyhealthapp.R;
-import com.beautyhealthapp.UserBackInfo.Activity.UserBackInfoActivity;
+import com.beautyhealthapp.UserCenter.BindUserActivity;
+import com.beautyhealthapp.UserCenter.UserBackInfoActivity;
 import com.infrastructure.CWFragment.DataRequestFragment;
 import com.infrastructure.CWSqliteManager.ISqlHelper;
 import com.infrastructure.CWSqliteManager.SqliteHelper;
@@ -112,7 +113,7 @@ public class MeFragment extends DataRequestFragment implements OnClickListener{
                 IsLoginTip(CallCenterActivity.class);
                 break;
             case R.id.tr_bindedPeople:
-                IsLoginTip(CallCenterActivity.class);
+                IsLoginTip(BindUserActivity.class);
                 break;
             default:
                 ToastUtil.show(getActivity(), "输入有误!");

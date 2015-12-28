@@ -1,4 +1,4 @@
-package com.beautyhealthapp.UserBackInfo.Activity;
+package com.beautyhealthapp.UserCenter;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

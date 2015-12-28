@@ -17,6 +17,7 @@ public class App extends Application {
 			iSqlHelper.CreateTable("com.Entity.UserMessage");
 			iSqlHelper.CreateTable("com.Entity.UserLocal");
 			iSqlHelper.CreateTable("com.Entity.BluetoothState");
+			iSqlHelper.CreateTable("com.Entity.BindingMessage");
 		}
 	}
 
