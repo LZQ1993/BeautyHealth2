@@ -154,7 +154,7 @@ public class DoctorBrieflyInfoActivity extends DataRequestActivity implements IX
     @Override
     public void onNavBarRightButtonClick(View view) {
         ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
-        List<Object> list = iSqlHelper.Query("com.Entity.UserMessage", null);
+        List<Object> list = iSqlHelper.Query("com.LocationEntity.UserMessage", null);
         if (list.size() > 0) {
             Intent intent = new Intent();
             intent.setClass(DoctorBrieflyInfoActivity.this,AppointRecordActivity.class);

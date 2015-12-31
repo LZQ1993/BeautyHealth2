@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent"
+    android:layout_width="60dp"
+    android:layout_height="30dp"
+     >
+
+    <Button
+        android:id="@+id/copy"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:background="#FC78716F"
+        android:textColor="#ffffff"
+        android:text="复制"
+        android:textSize="20sp"/>
+    
+</LinearLayout>

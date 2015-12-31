@@ -157,8 +157,7 @@ public class SearchHospitalFragment extends DataRequestFragment implements IXLis
             new AlertDialog.Builder(getActivity())
                     .setTitle("简介：")
                     .setMessage(hospitalInfo.get(position).HospitalBriefly)
-                    .setPositiveButton("取消",
-                            new DialogInterface.OnClickListener() {
+                    .setPositiveButton("取消", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     return;

@@ -13,12 +13,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
-import com.Entity.UserLocal;
+import com.LocationEntity.UserLocal;
 import com.beautyhealthapp.PersonHealth.Activity.PersonHealthActivity;
 import com.beautyhealthapp.PrivateDoctors.Activity.PrivateDoctorsActivity;
 import com.beautyhealthapp.R;
 import com.beautyhealthapp.SafeGuardianship.Activity.SafeGuardianshipActivity;
-import com.infrastructure.CWDomain.GlobalVariables;
 import com.infrastructure.CWFragment.DataRequestFragment;
 import com.infrastructure.CWSqliteManager.ISqlHelper;
 import com.infrastructure.CWSqliteManager.SqliteHelper;
@@ -95,7 +94,7 @@ public class MainFragment extends DataRequestFragment implements OnClickListener
 
     private void callTelephoneAction() {
         ISqlHelper iSqlHelper = new SqliteHelper(null,mContext);
-        List<Object> userLocal= iSqlHelper.Query(GlobalVariables.DATAEntity_PACKAGE+".UserLocal",null);
+        List<Object> userLocal= iSqlHelper.Query("com.LocationEntity.UserLocal",null);
         if (userLocal.size() > 0) {
             UserLocal retuserLocal = (UserLocal) userLocal.get(0);
             if (retuserLocal.getTel().equals("") || retuserLocal.getTel() == null) {

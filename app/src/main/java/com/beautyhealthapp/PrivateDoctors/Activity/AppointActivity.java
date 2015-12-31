@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.Entity.DoctorInfo;
 import com.Entity.ReturnTransactionMessage;
-import com.Entity.UserMessage;
+import com.LocationEntity.UserMessage;
 import com.beautyhealthapp.R;
 import com.infrastructure.CWActivity.DataRequestActivity;
 import com.infrastructure.CWDataDecoder.DataResult;
@@ -132,7 +132,7 @@ public class AppointActivity extends DataRequestActivity implements OnClickListe
 
     private void UserIsLoginTip() {
         ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
-        List<Object> list = iSqlHelper.Query("com.Entity.UserMessage", null);
+        List<Object> list = iSqlHelper.Query("com.LocationEntity.UserMessage", null);
         if (list.size() > 0) {
             UserMessage userMessage = (UserMessage) list.get(0);
             UserID = userMessage.UserID;

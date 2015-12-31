@@ -8,7 +8,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 
 import com.Entity.AppointInfo;
-import com.Entity.UserMessage;
+import com.LocationEntity.UserMessage;
 import com.beautyhealthapp.PrivateDoctors.Assistant.AppointRecordListAdapter;
 import com.beautyhealthapp.R;
 import com.infrastructure.CWActivity.DataRequestActivity;
@@ -103,7 +103,7 @@ public class AppointRecordActivity extends DataRequestActivity implements IXList
         String stime = Time + "-01 " + "00:00:00";
         String etime = Time + "-31 " + "23:59:59";
         ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
-        List<Object> list = iSqlHelper.Query("com.Entity.UserMessage", null);
+        List<Object> list = iSqlHelper.Query("com.LocationEntity.UserMessage", null);
         UserMessage userMessage = (UserMessage) list.get(0);
         String UserID = userMessage.UserID;
         String condition[] = { "UserID","StartTime", "EndTime", "page", "rows" };

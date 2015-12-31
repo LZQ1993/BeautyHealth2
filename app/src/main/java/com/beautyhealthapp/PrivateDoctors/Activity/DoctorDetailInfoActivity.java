@@ -94,7 +94,7 @@ public class DoctorDetailInfoActivity extends DataRequestActivity implements OnC
     @Override
     public void onNavBarRightButtonClick(View view) {
         ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
-        List<Object> list = iSqlHelper.Query("com.Entity.UserMessage", null);
+        List<Object> list = iSqlHelper.Query("com.LocationEntity.UserMessage", null);
         if (list.size() > 0) {
             Intent intent = new Intent();
             intent.setClass(DoctorDetailInfoActivity.this,AppointRecordActivity.class);

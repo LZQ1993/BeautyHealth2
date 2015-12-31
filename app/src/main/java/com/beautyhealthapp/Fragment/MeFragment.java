@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.Entity.BluetoothState;
+import com.LocationEntity.BluetoothState;
 import com.beautyhealthapp.CallCenter.Activity.CallCenterActivity;
 import com.beautyhealthapp.R;
 import com.beautyhealthapp.UserCenter.BindUserActivity;
+import com.beautyhealthapp.UserCenter.FamilyNumberActivity;
+import com.beautyhealthapp.UserCenter.PersonalInfoActivity;
 import com.beautyhealthapp.UserCenter.UserBackInfoActivity;
 import com.beautyhealthapp.UserCenter.UserManagerActivity;
 import com.infrastructure.CWFragment.DataRequestFragment;
@@ -72,7 +74,7 @@ public class MeFragment extends DataRequestFragment implements OnClickListener{
 
     private void initUIData() {
         iSqlHelper= new SqliteHelper(null,getActivity());
-        List<Object> list = iSqlHelper.Query("com.Entity.BluetoothState", null);
+        List<Object> list = iSqlHelper.Query("com.LocationEntity.BluetoothState", null);
         if(list.size()>0){
             BluetoothState bs =  (BluetoothState)list.get(0);
             if(bs.State.equals("1")){
@@ -105,13 +107,13 @@ public class MeFragment extends DataRequestFragment implements OnClickListener{
                 jumpActivity(UserManagerActivity.class);
                 break;
             case R.id.tr_personInfo:
-                IsLoginTip(CallCenterActivity.class);
+                IsLoginTip(PersonalInfoActivity.class);
                 break;
             case R.id.tr_userBackInfo:
                 IsLoginTip(UserBackInfoActivity.class);
                 break;
             case R.id.tr_familyNum:
-                IsLoginTip(CallCenterActivity.class);
+                IsLoginTip(FamilyNumberActivity.class);
                 break;
             case R.id.tr_bindedPeople:
                 IsLoginTip(BindUserActivity.class);
@@ -127,17 +129,15 @@ public class MeFragment extends DataRequestFragment implements OnClickListener{
         if(bluetoothAdapter.getState()==10){
             //打开蓝牙
             bluetoothAdapter.enable();
-            bluetoothState.AutoID=1;
             bluetoothState.State="1";
-            iSqlHelper.Delete(bluetoothState);
+            iSqlHelper.SQLExec("delete from BluetoothState");
             iSqlHelper.Insert(bluetoothState);
             bluetoothstateTv.setText("蓝牙已打开");
         }else {
             //关闭蓝牙
             bluetoothAdapter.disable();
-            bluetoothState.AutoID=1;
             bluetoothState.State="0";
-            iSqlHelper.Delete(bluetoothState);
+            iSqlHelper.SQLExec("delete from BluetoothState");
             iSqlHelper.Insert(bluetoothState);
             bluetoothstateTv.setText("蓝牙已关闭");
         }
@@ -145,7 +145,7 @@ public class MeFragment extends DataRequestFragment implements OnClickListener{
 
     private void IsLoginTip(Class<?> cls) {
         ISqlHelper iSqlHelper = new SqliteHelper(null,getActivity());
-        List<Object> list = iSqlHelper.Query("com.Entity.UserMessage", null);
+        List<Object> list = iSqlHelper.Query("com.LocationEntity.UserMessage", null);
         if (list.size() > 0) {
             jumpActivity(cls);
         }else{

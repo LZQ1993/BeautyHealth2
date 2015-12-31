@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.Entity.ReturnTransactionMessage;
-import com.Entity.UserMessage;
+import com.LocationEntity.UserMessage;
 import com.beautyhealthapp.Assistant.MyCountTimer;
 import com.beautyhealthapp.R;
 import com.infrastructure.CWActivity.DataRequestActivity;
@@ -62,7 +62,7 @@ public class LoginActivity extends DataRequestActivity implements
         Notifications.add(currentNotiName);
         Notifications.add(currentNotiName1);
         ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
-        List<Object> list = iSqlHelper.Query("com.Entity.UserMessage", null);
+        List<Object> list = iSqlHelper.Query("com.LocationEntity.UserMessage", null);
         if (list.size() > 0) {
             initNavBar("登录", true,false);
             isTureShow = false;
@@ -187,9 +187,8 @@ public class LoginActivity extends DataRequestActivity implements
                     if (CurrentAction == currentNotiName) {
                         if (msg.getResult().equals("1")) {
                             ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
-                            iSqlHelper.SQLExec("delete from UserMessage where AutoID=1");
+                            iSqlHelper.SQLExec("delete from UserMessage");
                             UserMessage userMessage = new UserMessage();
-                            userMessage.AutoID = 1;
                             userMessage.UserID = et_phone.getText().toString();
                             userMessage.Password = et_password.getText().toString();
                             userMessage.UUID = msg.tip;

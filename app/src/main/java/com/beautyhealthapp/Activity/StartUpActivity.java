@@ -8,7 +8,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.Entity.Ad;
-import com.Entity.BluetoothState;
+import com.LocationEntity.BluetoothState;
 import com.beautyhealthapp.R;
 import com.infrastructure.CWActivity.DataRequestActivity;
 import com.infrastructure.CWComponent.AppInfo;
@@ -65,7 +65,7 @@ public class StartUpActivity extends DataRequestActivity {
         setContentView(parentView);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
-        List<Object> ls = iSqlHelper.Query("com.Entity.BluetoothState", null);
+        List<Object> ls = iSqlHelper.Query("com.LocationEntity.BluetoothState", null);
         if (ls.size() > 0) {
             BluetoothState bs = (BluetoothState) ls.get(0);
             if (bs.State.equals("1")) {

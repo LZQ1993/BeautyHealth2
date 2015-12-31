@@ -1,4 +1,4 @@
-package com.Entity;
+package com.LocationEntity;
 
 import com.infrastructure.CWDomain.EntityBase;
 

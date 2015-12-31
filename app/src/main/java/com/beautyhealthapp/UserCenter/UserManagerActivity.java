@@ -6,7 +6,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import com.Entity.UserMessage;
+
+import com.LocationEntity.UserMessage;
 import com.beautyhealthapp.Activity.LoginActivity;
 import com.beautyhealthapp.R;
 import com.infrastructure.CWActivity.NavBarActivity;
@@ -40,9 +41,8 @@ public class UserManagerActivity extends NavBarActivity implements
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		iSqlHelper = new SqliteHelper(null,
-				getApplicationContext());
-	    list = iSqlHelper.Query("com.Entity.UserMessage", null);
+		iSqlHelper = new SqliteHelper(null, getApplicationContext());
+	    list = iSqlHelper.Query("com.LocationEntity.UserMessage", null);
 	    if(list.size()>0){
 	    	userMessage=(UserMessage) list.get(0);
 		    userid.setText(userMessage.UserID);

@@ -21,5 +21,6 @@
 
     <string name="userbackinfo_contenttip">   我们很乐意分享您的感受,欢迎提出意见和建议,我们会认真对待您的反馈,感谢您的关注和支持.</string>
     <string name="userbackinfo_headertip">尊敬的客户，您好!</string>
+    <string name="family_unadded">未指定联系人点击添加</string>
 
 </resources>

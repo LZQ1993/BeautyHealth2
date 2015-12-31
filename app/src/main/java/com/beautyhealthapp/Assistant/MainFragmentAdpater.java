@@ -126,7 +126,7 @@ public class MainFragmentAdpater implements OnCheckedChangeListener,OnClickListe
                 case 2:
                     if(rightVisibility.get(currentTab)&&rightPicId.get(currentTab)!=null){
                         ISqlHelper iSqlHelper = new SqliteHelper(null,fragmentActivity);
-                        List<Object> list = iSqlHelper.Query("com.Entity.UserMessage", null);
+                        List<Object> list = iSqlHelper.Query("com.LocationEntity.UserMessage", null);
                         if (list.size() > 0) {
                             Intent intent = new Intent();
                             intent.setClass(fragmentActivity,AppointRecordActivity.class);

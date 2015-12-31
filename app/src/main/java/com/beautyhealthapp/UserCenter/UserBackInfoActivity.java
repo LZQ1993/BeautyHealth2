@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.Entity.ReturnTransactionMessage;
-import com.Entity.UserMessage;
+import com.LocationEntity.UserMessage;
 import com.beautyhealthapp.R;
 import com.infrastructure.CWActivity.DataRequestActivity;
 import com.infrastructure.CWDataDecoder.DataResult;
@@ -38,7 +38,7 @@ public class UserBackInfoActivity extends DataRequestActivity implements OnClick
         initNavBar("用户反馈", true, false);
         fetchUIFromLayout();
         ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
-        List<Object> list = iSqlHelper.Query("com.Entity.UserMessage", null);
+        List<Object> list = iSqlHelper.Query("com.LocationEntity.UserMessage", null);
         if (list.size() > 0) {
             UserMessage userMessage = (UserMessage) list.get(0);
             UserID = userMessage.UserID;

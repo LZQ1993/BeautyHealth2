@@ -14,10 +14,11 @@ public class App extends Application {
 		appInfo = new AppInfo(getApplicationContext());
 		ISqlHelper iSqlHelper = new SqliteHelper(null,getApplicationContext());
 		if (appInfo.isNewVersion()) {
-			iSqlHelper.CreateTable("com.Entity.UserMessage");
-			iSqlHelper.CreateTable("com.Entity.UserLocal");
-			iSqlHelper.CreateTable("com.Entity.BluetoothState");
-			iSqlHelper.CreateTable("com.Entity.BindingMessage");
+			iSqlHelper.CreateTable("com.LocationEntity.UserMessage");
+			iSqlHelper.CreateTable("com.LocationEntity.UserLocal");
+			iSqlHelper.CreateTable("com.LocationEntity.BluetoothState");
+			iSqlHelper.CreateTable("com.LocationEntity.BindingMessage");
+			iSqlHelper.CreateTable("com.LocationEntity.LocalFamilyNum");
 		}
 	}
 
