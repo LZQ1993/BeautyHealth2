@@ -23,4 +23,12 @@
     <string name="userbackinfo_headertip">尊敬的客户，您好!</string>
     <string name="family_unadded">未指定联系人点击添加</string>
 
+    <string name="message1">短信1</string>
+    <string name="message2">短信2</string>
+    <string name="message3">短信3</string>
+    <string name="message4">短信4</string>
+    <string name="message5">短信5</string>
+    <string name="message6">短信6</string>
+
+
 </resources>

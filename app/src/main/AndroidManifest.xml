@@ -135,7 +135,8 @@
         <activity
             android:name=".UserCenter.AddFamilyNumberActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".UserCenter.PersonalInfoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -143,6 +144,11 @@
             android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".UserCenter.UpdatePasswordActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".UserCenter.OperateNumberActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>

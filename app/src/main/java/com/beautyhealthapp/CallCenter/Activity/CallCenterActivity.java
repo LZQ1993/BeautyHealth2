@@ -18,7 +18,6 @@ import com.infrastructure.CWDataRequest.RequestUtility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,12 +28,12 @@ public class CallCenterActivity extends DataRequestActivity implements IXListVie
     private XListView listview;
     private LinearLayout empty_view;
     private CityListAdapter adapter;
-    private List<Boolean> res1;
-    private List<String[]> params;
+    private ArrayList<Boolean> res1;
+    private ArrayList<String[]> params;
     private String[] citynames;
     private String[] phones;
     private Handler mHandler5 = new Handler();
-    public void setListItemes(List<String[]> _params,List<Boolean> _res1) {
+    public void setListItemes(ArrayList<String[]> _params,ArrayList<Boolean> _res1) {
         params=_params;
         res1=_res1;
     }

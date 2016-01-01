@@ -25,9 +25,6 @@ public class AddFamilyNumberActivity extends NavBarActivity {
     private EditText et_phone;
     private EditText et_address;
     private Bundle bundle;
-    private String name;
-    private String phone;
-    private String address;
     private String indexmy;
     private String UserID;
 
@@ -92,22 +89,15 @@ public class AddFamilyNumberActivity extends NavBarActivity {
             //如果数据不为空，则将数据添加到本地内存
             if(bundle.getString("name")!=null){
                 localFamilyNum.Indexmy=indexmy;
-                name =et_name.getText().toString();
-                phone =et_phone.getText().toString();
-                address =et_address.getText().toString();
-                localFamilyNum.PeopleName=name;
-                localFamilyNum.Tel=phone;
-                localFamilyNum.Address=address;
+                localFamilyNum.PeopleName=et_name.getText().toString();
+                localFamilyNum.Tel=et_phone.getText().toString();
+                localFamilyNum.Address=et_address.getText().toString();
                 localFamilyNum.UserID=UserID;
-                String sqlstr = "update LocalFamilyNum set PeopleName='"+name+"',Tel='"+phone+"',Address='"+address+"'  where UserID = '"+UserID+"'"+"and Indexmy='"+indexmy+"'";
+                String sqlstr = "update LocalFamilyNum set PeopleName='"+et_name.getText().toString()+"',Tel='"+et_phone.getText().toString()+"',Address='"+et_address.getText().toString()+"'  where UserID = '"+UserID+"'"+"and Indexmy='"+indexmy+"'";
                 iSqlHelper.SQLExec(sqlstr);
                 Toast.makeText(getApplicationContext(), "修改成功！", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(getApplicationContext(), FamilyNumberActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
+                finish();
             }else{
-                if(et_name.getText().toString()!=null&&et_phone.getText().toString()!=null&&et_address.getText().toString()!=null){
                     localFamilyNum.Indexmy=indexmy;
                     localFamilyNum.PeopleName=et_name.getText().toString();
                     localFamilyNum.Tel=et_phone.getText().toString();
@@ -115,7 +105,6 @@ public class AddFamilyNumberActivity extends NavBarActivity {
                     localFamilyNum.UserID=UserID;
                     iSqlHelper.Insert(localFamilyNum);
                     valueReturn();
-                }
             }
 
         }
@@ -137,7 +126,6 @@ public class AddFamilyNumberActivity extends NavBarActivity {
         intent.putExtras(bundlev);
         setResult(RESULT_OK, intent);
         finish();
-
     }
 
     @Override

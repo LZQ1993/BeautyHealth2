@@ -1,13 +1,17 @@
 package com.beautyhealthapp.UserCenter;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.Button;
 
 import com.Entity.FamilyNumberMessage;
+import com.Entity.ReturnTransactionMessage;
 import com.LocationEntity.LocalFamilyNum;
 import com.LocationEntity.UserMessage;
 import com.beautyhealthapp.R;
@@ -17,6 +21,7 @@ import com.infrastructure.CWDataDecoder.JsonDecode;
 import com.infrastructure.CWDataRequest.RequestUtility;
 import com.infrastructure.CWSqliteManager.ISqlHelper;
 import com.infrastructure.CWSqliteManager.SqliteHelper;
+import com.infrastructure.CWUtilities.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +31,7 @@ import java.util.Map;
 /**
  * Created by lenovo on 2015/12/30.
  */
-public class FamilyNumberActivity extends DataRequestActivity implements OnClickListener {
+public class FamilyNumberActivity extends DataRequestActivity implements OnClickListener, OnLongClickListener {
     private String currentNotiName = "FamilyNumberUpLoadNotifications";
     private String currentNotiName1 = "FamilyNumberDownLoadNotifications";
     private Button familyNumBtn1;
@@ -74,6 +79,9 @@ public class FamilyNumberActivity extends DataRequestActivity implements OnClick
         familyNumBtn1.setOnClickListener(this);
         familyNumBtn2.setOnClickListener(this);
         familyNumBtn3.setOnClickListener(this);
+        familyNumBtn1.setOnLongClickListener(this);
+        familyNumBtn2.setOnLongClickListener(this);
+        familyNumBtn3.setOnLongClickListener(this);
         upLoadBtn.setOnClickListener(this);
         downLoadBtn.setOnClickListener(this);
     }
@@ -101,6 +109,42 @@ public class FamilyNumberActivity extends DataRequestActivity implements OnClick
         }
     }
 
+    @Override
+    public boolean onLongClick(View v) {
+        if (v == familyNumBtn1) {
+            deleteFamilyNumTip(familyNumBtn1, 1);
+        }
+        if (v == familyNumBtn2) {
+            deleteFamilyNumTip(familyNumBtn2, 2);
+        }
+        if (v == familyNumBtn3) {
+            deleteFamilyNumTip(familyNumBtn3, 3);
+        }
+        return true;
+    }
+
+    private void deleteFamilyNumTip(Button familyNumBtn, final int _index) {
+        String familyUnadded = getApplicationContext().getString(R.string.family_unadded);
+        if (familyNumBtn.getText().toString().equals(familyUnadded)) {
+            ToastUtil.show(getApplicationContext(), "此亲情号为空，不能删除");
+        } else {
+            new AlertDialog.Builder(FamilyNumberActivity.this)
+                    .setTitle("提示")
+                    .setMessage("是否删除此亲情号")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
+                            iSqlHelper.SQLExec("delete from LocalFamilyNum where UserID='" + UserID + "' and Indexmy = '" + _index + "'");
+                            isEmpty();
+                            return;
+                        }
+                    })
+                    .setNegativeButton("取消", null)
+                    .setCancelable(false).show();
+        }
+    }
+
     private void redirectIntent(int flag, Button btn) {
         String familyUnadded = getApplicationContext().getString(R.string.family_unadded);
         if (btn.getText().toString().equals(familyUnadded)) {
@@ -111,7 +155,7 @@ public class FamilyNumberActivity extends DataRequestActivity implements OnClick
             intent.putExtras(bundle);
             startActivityForResult(intent, flag);
         } else {
-//			将从AddFamilyNumber中的消息传到号码操作界面OperateNumberActivity
+            //将从AddFamilyNumber中的消息传到号码操作界面OperateNumberActivity
             List<String> sendMessage = new ArrayList<String>();
             sendMessage.add(indexmys[flag - 1]);
             sendMessage.add(names[flag - 1]);
@@ -126,8 +170,34 @@ public class FamilyNumberActivity extends DataRequestActivity implements OnClick
     }
 
     private void upLoad() {
-
-
+        RequestUtility myru = new RequestUtility();
+        myru.setIP(null);
+        myru.setMethod("FamilyService", "uploadFamily");
+        Map requestCondition = new HashMap();
+        String condition[] = {"Indexmy", "PeopleName", "Tel", "Address", "UserID"};
+        //从本地中读取数据
+        ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
+        String whereString = " UserID = '" + UserID + "'";
+        List<Object> ls = iSqlHelper.Query("com.LocationEntity.LocalFamilyNum", whereString);
+        String strJson = "";
+        for (int i = 0; i < ls.size(); i++) {
+            LocalFamilyNum localFamilyNum = (LocalFamilyNum) ls.get(i);
+            String value[] = {localFamilyNum.Indexmy, localFamilyNum.PeopleName,
+                    localFamilyNum.Tel, localFamilyNum.Address, UserID};
+            if (i == ls.size() - 1) {
+                strJson = strJson + JsonDecode.toJson(condition, value);
+            } else {
+                strJson = strJson + JsonDecode.toJson(condition, value) + ",";
+            }
+        }
+        strJson = "{\"RealData\":[" + strJson + "]}";
+        requestCondition.put("json", strJson);
+        myru.setParams(requestCondition);
+        myru.setNotification(currentNotiName);
+        setRequestUtility(myru);
+        requestData();
+        dismissProgressDialog();
+        showProgressDialog(FamilyNumberActivity.this, "正在上传...");
     }
 
     private void downLoad() {
@@ -151,17 +221,56 @@ public class FamilyNumberActivity extends DataRequestActivity implements OnClick
     public void updateView() {
         dismissProgressDialog();
         if (result != null) {
-            if (CurrentAction == currentNotiName1) {
+            if (CurrentAction == currentNotiName) {
+                dataResult = dataDecode.decode(result, "ReturnTransactionMessage");
+                if (dataResult != null) {
+                    DataResult realData = (DataResult) dataResult;
+                    if (realData.getResultcode().equals("1")) {
+                        ReturnTransactionMessage msg = (ReturnTransactionMessage) realData.getResult().get(0);
+                        if (msg.getResult().equals("1")) {
+                            new AlertDialog.Builder(this)
+                                    .setTitle("成功")
+                                    .setMessage(msg.tip)
+                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            return;
+                                        }
+                                    }).setCancelable(false).show();
+                        } else {
+                            new AlertDialog.Builder(this)
+                                    .setTitle("失败")
+                                    .setMessage(msg.tip)
+                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            return;
+                                        }
+                                    }).setCancelable(false).show();
+                        }
+                    } else {
+                        DefaultTip(FamilyNumberActivity.this, "暂无数据");
+                    }
+                } else {
+                    DefaultTip(FamilyNumberActivity.this, "数据解析失败");
+                }
+            } else if (CurrentAction == currentNotiName1) {
                 dataResult = dataDecode.decode(result, "FamilyNumberMessage");
                 if (dataResult != null) {
                     DataResult realData = (DataResult) dataResult;
                     if (realData.getResultcode().equals("1")) {
                         // 删除表中原有的数据，保证只有一条
-                        iSqlHelper.SQLExec("delete from FamilyNumberMessage where UserID='" + UserID + "'");
+                        iSqlHelper.SQLExec("delete from LocalFamilyNum where UserID='" + UserID + "'");
                         for (int i = 0; i < realData.getResult().size(); i++) {
                             FamilyNumberMessage msg = (FamilyNumberMessage) realData.getResult().get(i);
                             // 将读到的数据逐条插入到相应的表中
-                            iSqlHelper.Insert(msg);
+                            LocalFamilyNum localFamilyNum = new LocalFamilyNum();
+                            localFamilyNum.Indexmy = msg.Indexmy;
+                            localFamilyNum.Address = msg.Address;
+                            localFamilyNum.PeopleName = msg.PeopleName;
+                            localFamilyNum.Tel = msg.Tel;
+                            localFamilyNum.UserID = msg.UserID;
+                            iSqlHelper.Insert(localFamilyNum);
                             if (msg.Indexmy.equals("1")) {
                                 indexmys[0] = msg.Indexmy;
                                 names[0] = msg.PeopleName;
@@ -221,6 +330,9 @@ public class FamilyNumberActivity extends DataRequestActivity implements OnClick
 
     //从本地读取数据用来显示是联系人的信息还是“未指定联系人点击添加”
     private void isEmpty() {
+        familyNumBtn1.setText(R.string.family_unadded);
+        familyNumBtn2.setText(R.string.family_unadded);
+        familyNumBtn3.setText(R.string.family_unadded);
         ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
         String whereString = "UserID='" + UserID + "'";
         List<Object> fnls = iSqlHelper.Query("com.LocationEntity.LocalFamilyNum", whereString);
@@ -228,12 +340,8 @@ public class FamilyNumberActivity extends DataRequestActivity implements OnClick
             for (int i = 0; i < fnls.size(); i++) {
                 LocalFamilyNum localFamilyNum = (LocalFamilyNum) fnls.get(i);
                 if (localFamilyNum.Indexmy.equals("1")) {
-                    if (localFamilyNum.PeopleName != null
-                            && localFamilyNum.Tel != null
-                            && localFamilyNum.Address != null) {
-                        familyNumBtn1.setText(localFamilyNum.PeopleName + "\n"
-                                + localFamilyNum.Tel + "\n"
-                                + localFamilyNum.Address);
+                    if (localFamilyNum.PeopleName != null && localFamilyNum.Tel != null && localFamilyNum.Address != null) {
+                        familyNumBtn1.setText(localFamilyNum.PeopleName + "\n" + localFamilyNum.Tel + "\n" + localFamilyNum.Address);
                     } else {
                         familyNumBtn1.setText(R.string.family_unadded);
                     }
@@ -243,12 +351,8 @@ public class FamilyNumberActivity extends DataRequestActivity implements OnClick
                     addresses[0] = localFamilyNum.Address;
                 }
                 if (localFamilyNum.Indexmy.equals("2")) {
-                    if (localFamilyNum.PeopleName != null
-                            && localFamilyNum.Tel != null
-                            && localFamilyNum.Address != null) {
-                        familyNumBtn2.setText(localFamilyNum.PeopleName + "\n"
-                                + localFamilyNum.Tel + "\n"
-                                + localFamilyNum.Address);
+                    if (localFamilyNum.PeopleName != null && localFamilyNum.Tel != null && localFamilyNum.Address != null) {
+                        familyNumBtn2.setText(localFamilyNum.PeopleName + "\n" + localFamilyNum.Tel + "\n" + localFamilyNum.Address);
                     } else {
                         familyNumBtn2.setText(R.string.family_unadded);
                     }
@@ -258,12 +362,8 @@ public class FamilyNumberActivity extends DataRequestActivity implements OnClick
                     addresses[1] = localFamilyNum.Address;
                 }
                 if (localFamilyNum.Indexmy.equals("3")) {
-                    if (localFamilyNum.PeopleName != null
-                            && localFamilyNum.Tel != null
-                            && localFamilyNum.Address != null) {
-                        familyNumBtn3.setText(localFamilyNum.PeopleName + "\n"
-                                + localFamilyNum.Tel + "\n"
-                                + localFamilyNum.Address);
+                    if (localFamilyNum.PeopleName != null && localFamilyNum.Tel != null && localFamilyNum.Address != null) {
+                        familyNumBtn3.setText(localFamilyNum.PeopleName + "\n" + localFamilyNum.Tel + "\n" + localFamilyNum.Address);
                     } else {
                         familyNumBtn3.setText(R.string.family_unadded);
                     }
@@ -273,7 +373,7 @@ public class FamilyNumberActivity extends DataRequestActivity implements OnClick
                     addresses[2] = localFamilyNum.Address;
                 }
             }
-        }else{
+        } else {
             familyNumBtn1.setText(R.string.family_unadded);
             familyNumBtn2.setText(R.string.family_unadded);
             familyNumBtn3.setText(R.string.family_unadded);
