@@ -1,4 +1,4 @@
-package com.beautyhealthapp.UserCenter;
+package com.beautyhealthapp.UserCenter.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;

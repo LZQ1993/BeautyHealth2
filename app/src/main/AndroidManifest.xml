@@ -28,15 +28,9 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <!-- 授予程序使用高德地图的权限 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
@@ -48,7 +42,7 @@
         android:theme="@android:style/Theme.Light.NoTitleBar" >
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="00b757207336c99cc1e7ef8c29b7ea11" />
+            android:value="c09de79bbe745212694372103f528de6" />
         <activity
             android:name=".Activity.StartUpActivity"
             android:label="@string/app_name">
@@ -108,50 +102,57 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CallCenter.Activity.CallCenterActivity"
+            android:name=".UserCenter.Activity.CallCenterActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserCenter.UserBackInfoActivity"
+            android:name=".UserCenter.Activity.UserBackInfoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserCenter.BindUserActivity"
+            android:name=".UserCenter.Activity.BindUserActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserCenter.UserManagerActivity"
+            android:name=".UserCenter.Activity.UserManagerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserCenter.PersonInfoActivity"
+            android:name=".UserCenter.Activity.PersonInfoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name=".UserCenter.FamilyNumberActivity"
+            android:name=".UserCenter.Activity.FamilyNumberActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserCenter.AddFamilyNumberActivity"
+            android:name=".UserCenter.Activity.AddFamilyNumberActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name=".UserCenter.PersonalInfoActivity"
+            android:name=".UserCenter.Activity.PersonalInfoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name=".UserCenter.UpdatePasswordActivity"
+            android:name=".UserCenter.Activity.UpdatePasswordActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name=".UserCenter.OperateNumberActivity"
+            android:name=".UserCenter.Activity.OperateNumberActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".UserCenter.Activity.GPSSettingActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <service android:name="com.amap.api.location.APSService" />
     </application>
 
 </manifest>

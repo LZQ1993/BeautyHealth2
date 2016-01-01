@@ -97,10 +97,10 @@ public class MainFragment extends DataRequestFragment implements OnClickListener
         List<Object> userLocal= iSqlHelper.Query("com.LocationEntity.UserLocal",null);
         if (userLocal.size() > 0) {
             UserLocal retuserLocal = (UserLocal) userLocal.get(0);
-            if (retuserLocal.getTel().equals("") || retuserLocal.getTel() == null) {
+            if (retuserLocal.Tel.equals("") || retuserLocal.Tel == null) {
                 ToastUtil.show(mContext, "呼叫中心号码未设置");
             } else {
-                Intent _intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + retuserLocal.getTel()));
+                Intent _intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + retuserLocal.Tel));
                 startActivity(_intent);
             }
         }else{

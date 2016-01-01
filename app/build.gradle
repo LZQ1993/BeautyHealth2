@@ -28,4 +28,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile files('libs/android-async-http-1.4.4.jar')
+    compile files('libs/AMap_Location_v2.0.0_20151117.jar')
 }

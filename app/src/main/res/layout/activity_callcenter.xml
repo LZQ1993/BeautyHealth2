@@ -11,22 +11,29 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:paddingLeft="10dp"
-            android:text="城市:"
-            android:textColor="#000000"
-            android:textSize="20sp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <com.infrastructure.CWAssistant.XListView
-            android:id="@+id/lv_callCenterCity"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:cacheColorHint="#00000000"
-            android:choiceMode="singleChoice">
-        </com.infrastructure.CWAssistant.XListView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:paddingLeft="10dp"
+                android:text="城市:"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <ListView
+                android:id="@+id/lv_city"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:divider="#ffffff"
+                android:dividerHeight="20dip"></ListView>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/empty_view"

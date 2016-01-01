@@ -1,4 +1,4 @@
-package com.beautyhealthapp.UserCenter;
+package com.beautyhealthapp.UserCenter.Activity;
 
 import com.infrastructure.CWActivity.DataRequestActivity;
 

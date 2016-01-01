@@ -1,4 +1,4 @@
-package com.beautyhealthapp.CallCenter.Assistant;
+package com.beautyhealthapp.UserCenter.Assistant;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,41 +7,38 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import com.Entity.CallCenterOfCity;
 import com.beautyhealthapp.R;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by lenovo on 2015/12/27.
  */
-public class CityListAdapter extends BaseAdapter {
-
+public class CityListAdapter extends BaseAdapter{
     public int SelectedPosition=0;
     private Context context;
-    List<Boolean> res1;
-    private List<String[]> params;
-    // 用于记录每个RadioButton的状态，并保证只可选一个
-    HashMap<String, Boolean> states = new HashMap<String, Boolean>();
+    ArrayList<CallCenterOfCity> CityInfo;
+    ArrayList<Boolean> isSelected;
     public static class ViewHolder {
         TextView tvName;
         RadioButton rb_state;
     }
-
-    public CityListAdapter(Context context, List<String[]> _params,List<Boolean> res1) {
-        this.params = _params;
+    public CityListAdapter(Context context,ArrayList<CallCenterOfCity> CityInfo, ArrayList<Boolean> isSelected) {
+        this.CityInfo = CityInfo;
         this.context = context;
-        this.res1=res1;
+        this.isSelected=isSelected;
     }
 
     @Override
     public int getCount() {
-        return params.get(0).length;
+        return CityInfo.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return params.get(0)[position];
+        return CityInfo.get(position);
     }
 
     @Override
@@ -62,21 +59,22 @@ public class CityListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        String citynames = params.get(0)[position];
-        String phone = params.get(1)[position];
+        CallCenterOfCity callCenterOfCity = (CallCenterOfCity) getItem(position);
+        String citynames =callCenterOfCity.CityName;
+        String phone =callCenterOfCity.Tel;
         holder.tvName.setText(citynames);
-        holder.rb_state.setChecked(res1.get(position));
+        holder.rb_state.setChecked(isSelected.get(position));
 
-        if(res1.get(position)==true){
+        if(isSelected.get(position)==true){
             SelectedPosition=position;
         }
 
         holder.rb_state.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                res1.set(position, true);
-                for(int i=0;i<res1.size();i++){
+                isSelected.set(position, true);
+                for(int i=0;i<isSelected.size();i++){
                     if(i!=position){
-                        res1.set(i, false);
+                        isSelected.set(i, false);
                     }
                 }
                 SelectedPosition=position;

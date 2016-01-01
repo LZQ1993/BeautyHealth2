@@ -12,13 +12,14 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.LocationEntity.BluetoothState;
-import com.beautyhealthapp.CallCenter.Activity.CallCenterActivity;
+import com.beautyhealthapp.UserCenter.Activity.CallCenterActivity;
 import com.beautyhealthapp.R;
-import com.beautyhealthapp.UserCenter.BindUserActivity;
-import com.beautyhealthapp.UserCenter.FamilyNumberActivity;
-import com.beautyhealthapp.UserCenter.PersonalInfoActivity;
-import com.beautyhealthapp.UserCenter.UserBackInfoActivity;
-import com.beautyhealthapp.UserCenter.UserManagerActivity;
+import com.beautyhealthapp.UserCenter.Activity.BindUserActivity;
+import com.beautyhealthapp.UserCenter.Activity.FamilyNumberActivity;
+import com.beautyhealthapp.UserCenter.Activity.GPSSettingActivity;
+import com.beautyhealthapp.UserCenter.Activity.PersonalInfoActivity;
+import com.beautyhealthapp.UserCenter.Activity.UserBackInfoActivity;
+import com.beautyhealthapp.UserCenter.Activity.UserManagerActivity;
 import com.infrastructure.CWFragment.DataRequestFragment;
 import com.infrastructure.CWSqliteManager.ISqlHelper;
 import com.infrastructure.CWSqliteManager.SqliteHelper;
@@ -98,7 +99,7 @@ public class MeFragment extends DataRequestFragment implements OnClickListener{
                 BluetoothIsEnable();
                 break;
             case R.id.tr_gps:
-                IsLoginTip(CallCenterActivity.class);
+                IsLoginTip(GPSSettingActivity.class);
                 break;
             case R.id.tr_callCerten:
                 jumpActivity(CallCenterActivity.class);
