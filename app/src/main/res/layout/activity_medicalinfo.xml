@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 添加导航 -->
+
+    <include layout="@layout/activity_navbar" />
+    <ListView
+        android:id="@+id/lv_medicalinfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="2px"
+        android:scrollbars="none" >
+    </ListView>
+
+</LinearLayout>

@@ -13,7 +13,7 @@ public class SafeGuardianshipActivity extends NavBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personhealth);
+        setContentView(R.layout.activity_safeguardianship);
         initNavBar("安全监护",true,false);
     }
 }

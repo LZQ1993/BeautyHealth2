@@ -170,7 +170,7 @@ public class AppointActivity extends DataRequestActivity implements OnClickListe
             dataResult = dataDecode.decode(result, "ReturnTransactionMessage");
             if (dataResult != null) {
                 DataResult realData = (DataResult) dataResult;
-                if (realData.getResultcode().equals("1")) {
+                if (realData.getResultcode().equals("1")&&realData.getResult().size()>0) {
                     ReturnTransactionMessage msg = (ReturnTransactionMessage) realData.getResult().get(0);
                     if (msg.getResult().equals("0")) {
                         new AlertDialog.Builder(this)

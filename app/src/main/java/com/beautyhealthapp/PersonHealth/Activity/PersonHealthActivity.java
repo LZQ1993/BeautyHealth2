@@ -35,12 +35,12 @@ public class PersonHealthActivity extends NavBarActivity implements OnClickListe
     }
 
     private void setListener() {
-        bloodpressure.setOnClickListener((OnClickListener) this);
-        bloodsugar.setOnClickListener((OnClickListener) this);
-        pedometer.setOnClickListener((OnClickListener) this);
-        abilityfunction.setOnClickListener((OnClickListener) this);
-        medicalreport.setOnClickListener((OnClickListener) this);
-        mylocation.setOnClickListener((OnClickListener) this);
+        bloodpressure.setOnClickListener(this);
+        bloodsugar.setOnClickListener(this);
+        pedometer.setOnClickListener(this);
+        abilityfunction.setOnClickListener(this);
+        medicalreport.setOnClickListener(this);
+        mylocation.setOnClickListener(this);
 
     }
 

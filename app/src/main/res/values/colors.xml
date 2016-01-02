@@ -295,4 +295,6 @@
     <color name="transparent">#0000</color>
     <!-- 透明 -->
     <color name="transparent2">#8000</color>
+
+    <color name="none_color">#00000000</color>
 </resources>

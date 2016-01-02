@@ -249,7 +249,7 @@ public class PersonalInfoActivity extends DataRequestActivity implements OnClick
 				dataResult = dataDecode.decode(result,"UserInfo");
 				if (dataResult != null) {
 					DataResult realData = (DataResult) dataResult;
-					if (realData.getResultcode().equals("1")) {
+					if (realData.getResultcode().equals("1")&&realData.getResult().size()>0) {
 						UserInfo msg = (UserInfo) realData.getResult().get(0);
 						ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
 						String sqlStr = "update UserMessage set UserAddress ='"
@@ -270,7 +270,7 @@ public class PersonalInfoActivity extends DataRequestActivity implements OnClick
 				dataResult = dataDecode.decode(result, "ReturnTransactionMessage");
 				if (dataResult != null) {
 					DataResult realData = (DataResult) dataResult;
-					if (realData.getResultcode().equals("1")) {
+					if (realData.getResultcode().equals("1")&&realData.getResult().size()>0) {
 						ReturnTransactionMessage msg = (ReturnTransactionMessage) realData.getResult().get(0);
 						if (msg.getResult().equals("1")) {
 							tv_registercode.setText(msg.tip);
@@ -303,7 +303,7 @@ public class PersonalInfoActivity extends DataRequestActivity implements OnClick
 				dataResult = dataDecode.decode(result, "ReturnTransactionMessage");
 				if (dataResult != null) {
 					DataResult realData = (DataResult) dataResult;
-					if (realData.getResultcode().equals("1")) {
+					if (realData.getResultcode().equals("1")&&realData.getResult().size()>0) {
 						ReturnTransactionMessage msg = (ReturnTransactionMessage) realData.getResult().get(0);
 						if (msg.getResult().equals("1")) {
 							new AlertDialog.Builder(this)

@@ -225,7 +225,7 @@ public class FamilyNumberActivity extends DataRequestActivity implements OnClick
                 dataResult = dataDecode.decode(result, "ReturnTransactionMessage");
                 if (dataResult != null) {
                     DataResult realData = (DataResult) dataResult;
-                    if (realData.getResultcode().equals("1")) {
+                    if (realData.getResultcode().equals("1")&&realData.getResult().size()>0) {
                         ReturnTransactionMessage msg = (ReturnTransactionMessage) realData.getResult().get(0);
                         if (msg.getResult().equals("1")) {
                             new AlertDialog.Builder(this)
@@ -258,7 +258,7 @@ public class FamilyNumberActivity extends DataRequestActivity implements OnClick
                 dataResult = dataDecode.decode(result, "FamilyNumberMessage");
                 if (dataResult != null) {
                     DataResult realData = (DataResult) dataResult;
-                    if (realData.getResultcode().equals("1")) {
+                    if (realData.getResultcode().equals("1")&&realData.getResult().size()>0) {
                         // 删除表中原有的数据，保证只有一条
                         iSqlHelper.SQLExec("delete from LocalFamilyNum where UserID='" + UserID + "'");
                         for (int i = 0; i < realData.getResult().size(); i++) {

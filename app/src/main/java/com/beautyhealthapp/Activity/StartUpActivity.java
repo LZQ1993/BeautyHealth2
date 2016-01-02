@@ -122,7 +122,7 @@ public class StartUpActivity extends DataRequestActivity {
             if (dataResult != null) {
                 DataResult realData = (DataResult) dataResult;
                 if (CurrentAction.equals(currentNotiName)) {
-                    if (realData.getResultcode().equals("1")) {
+                    if (realData.getResultcode().equals("1")&&realData.getResult().size()>0) {
                         load = new LoadImage(localPath);
                         for (int i = 0; i < realData.getResult().size(); i++) {
                             Ad msg = (Ad) realData.getResult().get(i);

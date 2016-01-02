@@ -182,7 +182,7 @@ public class LoginActivity extends DataRequestActivity implements
             dataResult = dataDecode.decode(result,"ReturnTransactionMessage");
             if (dataResult != null) {
                 DataResult realData = (DataResult) dataResult;
-                if (realData.getResultcode().equals("1")) {
+                if (realData.getResultcode().equals("1")&&realData.getResult().size()>0) {
                     ReturnTransactionMessage msg = (ReturnTransactionMessage) realData.getResult().get(0);
                     if (CurrentAction == currentNotiName) {
                         if (msg.getResult().equals("1")) {
