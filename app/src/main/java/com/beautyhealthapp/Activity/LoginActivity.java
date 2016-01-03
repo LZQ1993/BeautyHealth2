@@ -28,7 +28,6 @@ import com.infrastructure.CWSqliteManager.SqliteHelper;
 import com.infrastructure.CWUtilities.ToastUtil;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -45,13 +44,9 @@ public class LoginActivity extends DataRequestActivity implements
     private String Password;
     private String PasswordType;
     private CheckBox cb_jizhumima;
-    private List<Object> list;
     private SharedPreferences config;
     private RelativeLayout rl_user;
     private ImageView login_picture;
-    private Boolean isTureShow = false;
-    Intent intent = new Intent();
-    Bundle bndle = new Bundle();
     private String currentNotiName = "LoginNotifications";
     private String currentNotiName1 = "ReturnCodeNotifications";
 
@@ -61,15 +56,7 @@ public class LoginActivity extends DataRequestActivity implements
         setContentView(R.layout.activity_login);
         Notifications.add(currentNotiName);
         Notifications.add(currentNotiName1);
-        ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
-        List<Object> list = iSqlHelper.Query("com.LocationEntity.UserMessage", null);
-        if (list.size() > 0) {
-            initNavBar("登录", true,false);
-            isTureShow = false;
-        } else {
-            initNavBar("登录", false,false);
-            isTureShow = true;
-        }
+        initNavBar("登录", false,false);
         fetchUIFromLayout();
         setListener();
 
@@ -198,7 +185,7 @@ public class LoginActivity extends DataRequestActivity implements
                             Password = et_password.getText().toString();
                             isRemember();
                             if (Password.equals("123456")) {
-                                ToastUtil.show(getApplicationContext(), "登录成功,默认密码：123456，建议您立即修改");
+                                ToastUtil.show(getApplicationContext(), "登录成功,默认密码为：123456，建议您立即修改");
                             } else {
                                 ToastUtil.show(getApplicationContext(), "登录成功");
                             }
