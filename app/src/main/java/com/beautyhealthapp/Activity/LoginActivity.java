@@ -233,10 +233,12 @@ public class LoginActivity extends DataRequestActivity implements
         edit.putBoolean("isChecked", isChecked);
         if (isChecked) {
             edit.putString("UserName", UserName)
-                    .putString("Password", Password);
+                    .putString("Password", Password)
+                    .putString("PasswordType", PasswordType);
         } else {
             edit.remove("UserName");
             edit.remove("Password");
+            edit.remove("PasswordType");
         }
         edit.commit();
     }

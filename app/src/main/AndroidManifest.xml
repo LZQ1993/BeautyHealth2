@@ -26,14 +26,14 @@
     <!-- 授予程序使用摄像头的权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-feature android:name="android.hardware.CAMERA.AUTOFOCUS" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-
+     
     <application
         android:allowBackup="true"
         android:name="com.beautyhealthapp.Assistant.App"
@@ -151,8 +151,7 @@
             android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".SafeGuardianship.Activity.ActionMonitorActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".SafeGuardianship.Activity.LocationMonitorActivity"
@@ -160,14 +159,17 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name=".SafeGuardianship.Activity.PressureMonitorActivity"
+            android:name=".SafeGuardianship.Activity.MonitorPathActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
         <activity
+            android:name=".SafeGuardianship.Activity.PressureMonitorActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
             android:name=".SafeGuardianship.Activity.SugarMonitorActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".UserCenter.Activity.CallCenterActivity"
@@ -219,7 +221,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
-
+        <service android:name=".Service.AutoLoginService" />
         <service android:name="com.amap.api.location.APSService" />
     </application>
 

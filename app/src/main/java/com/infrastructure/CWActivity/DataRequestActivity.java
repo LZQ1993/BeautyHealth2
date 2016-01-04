@@ -102,6 +102,7 @@ public class DataRequestActivity extends NavBarActivity {
 
 	@Override
 	public void onResume() {
+
 		super.onResume();
 	}
 

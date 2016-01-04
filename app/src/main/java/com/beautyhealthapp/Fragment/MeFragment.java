@@ -94,30 +94,31 @@ public class MeFragment extends DataRequestFragment implements OnClickListener{
 
     @Override
     public void onClick(View view) {
+        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.tr_bluetooth:
                 BluetoothIsEnable();
                 break;
             case R.id.tr_gps:
-                IsLoginTip(GPSSettingActivity.class);
+                IsLoginTip(GPSSettingActivity.class,intent);
                 break;
             case R.id.tr_callCerten:
-                jumpActivity(CallCenterActivity.class);
+                jumpActivity(CallCenterActivity.class,intent);
                 break;
             case R.id.tr_userManger:
-                jumpActivity(UserManagerActivity.class);
+                jumpActivity(UserManagerActivity.class,intent);
                 break;
             case R.id.tr_personInfo:
-                IsLoginTip(PersonalInfoActivity.class);
+                IsLoginTip(PersonalInfoActivity.class,intent);
                 break;
             case R.id.tr_userBackInfo:
-                IsLoginTip(UserBackInfoActivity.class);
+                IsLoginTip(UserBackInfoActivity.class,intent);
                 break;
             case R.id.tr_familyNum:
-                IsLoginTip(FamilyNumberActivity.class);
+                IsLoginTip(FamilyNumberActivity.class,intent);
                 break;
             case R.id.tr_bindedPeople:
-                IsLoginTip(BindUserActivity.class);
+                IsLoginTip(BindUserActivity.class,intent);
                 break;
             default:
                 ToastUtil.show(getActivity(), "输入有误!");
@@ -144,18 +145,17 @@ public class MeFragment extends DataRequestFragment implements OnClickListener{
         }
     }
 
-    private void IsLoginTip(Class<?> cls) {
+    private void IsLoginTip(Class<?> cls,Intent intent) {
         ISqlHelper iSqlHelper = new SqliteHelper(null,getActivity());
         List<Object> list = iSqlHelper.Query("com.LocationEntity.UserMessage", null);
         if (list.size() > 0) {
-            jumpActivity(cls);
+            jumpActivity(cls,intent);
         }else{
             ToastUtil.show(mContext, "亲~，请您先登录");
         }
     }
 
-    private void jumpActivity(Class<?> cls) {
-        Intent intent = new Intent();
+    private void jumpActivity(Class<?> cls,Intent intent) {
         intent.setClass(getActivity(), cls);
         startActivity(intent);
     }

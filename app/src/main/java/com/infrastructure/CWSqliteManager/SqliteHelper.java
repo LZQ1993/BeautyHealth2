@@ -160,6 +160,7 @@ public class SqliteHelper implements ISqlHelper {
             if (WhereStr != null) {
                 SqlPRE += " where " + WhereStr;
             }
+           // SqlPRE +="ORDER BY"+GlobalVariables.PRIMARY_KEY_NAME+"ASC";
             Cursor curesor = dataBase.rawQuery(SqlPRE, null);
             List<Object> lists = new ArrayList<Object>();
             while (curesor.moveToNext()) {

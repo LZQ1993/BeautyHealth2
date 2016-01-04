@@ -20,7 +20,7 @@ import java.util.List;
 public class UserManagerActivity extends NavBarActivity implements
 		OnClickListener {
 
-	private Button btn1,btn2;
+	private Button btn1;
 	private TextView userid;
 	private ISqlHelper iSqlHelper;
 	private List<Object> list ;
@@ -57,8 +57,7 @@ public class UserManagerActivity extends NavBarActivity implements
 	}
 
 	private void setListener() {
-		btn1.setOnClickListener((OnClickListener) this);
-
+		btn1.setOnClickListener(this);
 	}
 
 	@Override

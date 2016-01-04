@@ -2,6 +2,7 @@ package com.beautyhealthapp.Activity;
 
 
 import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -17,6 +18,7 @@ import com.beautyhealthapp.Fragment.MeFragment;
 import com.beautyhealthapp.Fragment.MembersCenterFragment;
 import com.beautyhealthapp.Fragment.SearchHospitalFragment;
 import com.beautyhealthapp.R;
+import com.beautyhealthapp.Service.AutoLoginService;
 import com.infrastructure.CWSqliteManager.ISqlHelper;
 import com.infrastructure.CWSqliteManager.SqliteHelper;
 
@@ -82,6 +84,8 @@ public class MainActivity extends FragmentActivity {
                 iSqlHelper.SQLExec("delete from UserMessage");// 删除表中原有的数据，保证只有一条
                 BluetoothAdapter bluetoothAdapter= BluetoothAdapter.getDefaultAdapter();
                 bluetoothAdapter.disable();
+                Intent service = new Intent(getApplicationContext(), AutoLoginService.class);
+                stopService(service);
                 finish();
                 System.exit(0); // 凡是非零都表示异常退出!0表示正常退出!
             }

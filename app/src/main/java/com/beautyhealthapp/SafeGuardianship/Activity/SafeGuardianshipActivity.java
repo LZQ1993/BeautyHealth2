@@ -1,5 +1,6 @@
 package com.beautyhealthapp.SafeGuardianship.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -92,9 +93,8 @@ public class SafeGuardianshipActivity extends NavBarActivity implements OnClickL
 
     private void jumpActivity(Class<?> cls,View view) {
         view.startAnimation(scaleAnim);
-        ToastUtil.show(getApplicationContext(),"yes");
-        /*Intent _intent = new Intent();
+        Intent _intent = new Intent();
         _intent.setClass(SafeGuardianshipActivity.this, cls);
-        startActivity(_intent);*/
+        startActivity(_intent);
     }
 }

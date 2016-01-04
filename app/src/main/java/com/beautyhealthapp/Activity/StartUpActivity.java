@@ -2,6 +2,7 @@ package com.beautyhealthapp.Activity;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import com.Entity.Ad;
 import com.LocationEntity.BluetoothState;
 import com.beautyhealthapp.R;
+import com.beautyhealthapp.Service.AutoLoginService;
 import com.infrastructure.CWActivity.DataRequestActivity;
 import com.infrastructure.CWComponent.AppInfo;
 import com.infrastructure.CWComponent.ImageCal;
@@ -46,6 +48,7 @@ public class StartUpActivity extends DataRequestActivity {
     private long size;
     private int resultflag;
     private BluetoothAdapter bluetoothAdapter;
+    ISqlHelper iSqlHelper;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +67,7 @@ public class StartUpActivity extends DataRequestActivity {
         }
         setContentView(parentView);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
+        iSqlHelper = new SqliteHelper(null, getApplicationContext());
         List<Object> ls = iSqlHelper.Query("com.LocationEntity.BluetoothState", null);
         if (ls.size() > 0) {
             BluetoothState bs = (BluetoothState) ls.get(0);
@@ -91,10 +94,21 @@ public class StartUpActivity extends DataRequestActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    intent.setClass(StartUpActivity.this, LoginActivity.class);
-                    intent.putExtra("goto", MainActivity.class.getName());
-                    startActivity(intent);
-                    finish();
+                    SharedPreferences config = getSharedPreferences("config", MODE_PRIVATE);
+                    boolean isChecked = config.getBoolean("isChecked", false);
+                    String passwordType = config.getString("PasswordType","1");
+                    if (isChecked&&passwordType.trim().toString().equals("2")) {
+                        Intent serviceIntent = new Intent(getApplicationContext(),AutoLoginService.class);
+                        startService(serviceIntent);
+                        intent.setClass(StartUpActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                        intent.setClass(StartUpActivity.this, LoginActivity.class);
+                        intent.putExtra("goto", MainActivity.class.getName());
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         }.start();
