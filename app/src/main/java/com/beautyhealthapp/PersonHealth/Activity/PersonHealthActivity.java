@@ -8,7 +8,11 @@ import android.widget.ImageButton;
 
 import com.beautyhealthapp.R;
 import com.infrastructure.CWActivity.NavBarActivity;
+import com.infrastructure.CWSqliteManager.ISqlHelper;
+import com.infrastructure.CWSqliteManager.SqliteHelper;
 import com.infrastructure.CWUtilities.ToastUtil;
+
+import java.util.List;
 
 /**
  * Created by lenovo on 2015/12/25.
@@ -48,25 +52,34 @@ public class PersonHealthActivity extends NavBarActivity implements OnClickListe
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btn_bloodpressure:
-                jumpActivity(MedicalReportActivity.class);
+                jumpActivity(PressureMeasureActivity.class);
                 break;
             case R.id.btn_bloodsugar:
-                jumpActivity(MedicalReportActivity.class);
+                jumpActivity(SugarMeasureActivity.class);
                 break;
             case R.id.btn_pedometer:
-                jumpActivity(MedicalReportActivity.class);
+                jumpActivity(PedometerActivity.class);
                 break;
             case R.id.btn_abilityfunction:
-                jumpActivity(MedicalReportActivity.class);
+                jumpActivity(ActiveAbleActivity.class);
                 break;
             case R.id.btn_medicalreport:
                 jumpActivity(MedicalReportActivity.class);
                 break;
             case R.id.btn_mylocation:
-                jumpActivity(MedicalReportActivity.class);
+                IsLoginTip(MyLocationActivity.class);
                 break;
-            default:
-                ToastUtil.show(getApplicationContext(), "输入有误!");
+            default:break;
+        }
+    }
+
+    private void IsLoginTip(Class<?> cls) {
+        ISqlHelper iSqlHelper = new SqliteHelper(null,getApplicationContext());
+        List<Object> list = iSqlHelper.Query("com.LocationEntity.UserMessage", null);
+        if (list.size() > 0) {
+            jumpActivity(cls);
+        }else{
+            ToastUtil.show(getApplicationContext(), "亲~，请您先登录");
         }
     }
 

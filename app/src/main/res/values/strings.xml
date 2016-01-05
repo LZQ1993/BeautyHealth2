@@ -30,5 +30,33 @@
     <string name="message5">短信5</string>
     <string name="message6">短信6</string>
 
+    <string name="activeablehelp">1.每间隔您设置的提醒间隔即会发出提醒\n2.当未处理的提醒累计超过您设置的提醒次数,呼叫将自动启动,即向您设定的亲情号发送短信</string>
+
+    <!-- 血压测量方法 -->
+    <string name="pressureMethod1">静坐3分钟，左手穿入臂带，\n\t  将臂带拉扣在手臂上。\n臂带距离手肘2~3cm的位置</string>
+    <string name="pressureMethod2">\t\t将臂带气管对准手臂大动脉，\n臂带收紧到手臂舒适为宜，不能太松\n或太紧，以可以插入一个手指为最佳。</string>
+    <string name="pressureMethod3">\t放松肩部和手臂，手心向上，\n将臂带中部与心脏高度保持一致。</string>
+    <string name="pressureMethod4">挺直身体，保持正确的坐姿。\n   注意不要让身体前倾弯曲。</string>
+    <string name="pressureMethod5">\t\t\t\t\t按下“开关”键，开始测量\n（测量中保持安静，不要移动手臂或身体）</string>
+    <string name="pressureMethod6">手机屏幕查看测量结果，并管理血压数据。\n\t\t\t同时也可从血压计屏幕读取。</string>
+    <!-- 血糖测量方法 -->
+    <string name="sugarMethod1">\t\t\t  用温水洗手后擦干\n并用75%酒精棉球消毒取血部分</string>
+    <string name="sugarMethod2">拧开采血笔调整套螺纹</string>
+    <string name="sugarMethod3">将采血针嵌入笔杆内，采血针不一\n定要安装到底部，固定住就可以了</string>
+    <string name="sugarMethod4">\t\t\t   拧断采血针护帽，\n 注意不要将拧下来的护冒丢掉，\n一会弃置采血针的时候需要用到</string>
+    <string name="sugarMethod5">\t\t\t\t旋紧调整帽\n也就是把采血笔的笔帽盖好</string>
+    <string name="sugarMethod6">根据患者手指皮肤情况调整数字环，\n\t\t\t\t\t建议调至4档\n\t\t（数字越大，扎得越深）</string>
+    <string name="sugarMethod7">将笔筒拉开（记得要拉到底）\n\t    此时蓝色按钮会突出来</string>
+    <string name="sugarMethod8">\t 按照手机屏幕提示需要先\n选择测试时间段才能开始测试</string>
+    <string name="sugarMethod9">已检测到设备，可以插入试纸了</string>
+    <string name="sugarMethod10">\t\t打开试纸瓶，取出一片试纸,\n\t\t   30秒内立即合上试纸瓶盖，\n以免吸收空气中的水分，影响测量值</string>
+    <string name="sugarMethod11">将试条的电极端插入血糖仪中\n       注意电极面朝向血糖仪正面</string>
+    <string name="sugarMethod12">试纸已经插入，可以准备滴血了</string>
+    <string name="sugarMethod13">\t\t  使用酒精棉为手指消毒,\n等待酒精完全恢复干后方可取血</string>
+    <string name="sugarMethod14">使用采血笔在消毒部位取血</string>
+    <string name="sugarMethod15">挤出血样，使血样成滴状置于手指上\n        将试纸条顶端的吸血口与血液接触</string>
+    <string name="sugarMethod16">加入血样5秒后，测试结果会显示在屏幕\n\t\t\t\t\t\t\t\t\t\t上</string>
+    <string name="sugarMethod17">手动拔出试条，建议按照医用废弃物方法\n\t\t\t\t\t\t\t\t  处理</string>
+    <string name="sugarMethod18">将采血针插到采血针帽上，取下一同丢弃</string>
 
 </resources>

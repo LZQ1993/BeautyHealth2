@@ -36,13 +36,13 @@ public class AutoLoginService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        autologin();
+
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        autologin();
         return super.onStartCommand(intent, flags, startId);
-
     }
 
     @Override

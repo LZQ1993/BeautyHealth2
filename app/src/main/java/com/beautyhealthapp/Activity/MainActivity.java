@@ -94,4 +94,15 @@ public class MainActivity extends FragmentActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    protected void onDestroy() {
+        ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
+        iSqlHelper.SQLExec("delete from UserMessage");// 删除表中原有的数据，保证只有一条
+        BluetoothAdapter bluetoothAdapter= BluetoothAdapter.getDefaultAdapter();
+        bluetoothAdapter.disable();
+        Intent service = new Intent(getApplicationContext(), AutoLoginService.class);
+        stopService(service);
+        super.onDestroy();
+    }
 }

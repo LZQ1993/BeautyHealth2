@@ -60,7 +60,7 @@ public class LocationMonitorActivity extends DataRequestActivity implements OnIn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locationmonitor);
         Notifications.add(currentNotiName);
-        setRightpicID(R.mipmap.monitorpath);
+        setRightpicID(R.mipmap.road);
         initNavBar("位置监护", true, true);
         mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写

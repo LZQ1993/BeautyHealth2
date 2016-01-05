@@ -297,4 +297,10 @@
     <color name="transparent2">#8000</color>
 
     <color name="none_color">#00000000</color>
+
+
+    <!--蓝色  -->
+    <color name="blue_color">#15abd0</color>
+    <!-- 浅蓝色 -->
+    <color name="wathet_color">#139bbc</color>
 </resources>

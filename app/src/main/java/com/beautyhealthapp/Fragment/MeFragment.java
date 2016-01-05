@@ -12,9 +12,10 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.LocationEntity.BluetoothState;
-import com.beautyhealthapp.UserCenter.Activity.CallCenterActivity;
+import com.beautyhealthapp.Activity.LoginActivity;
 import com.beautyhealthapp.R;
 import com.beautyhealthapp.UserCenter.Activity.BindUserActivity;
+import com.beautyhealthapp.UserCenter.Activity.CallCenterActivity;
 import com.beautyhealthapp.UserCenter.Activity.FamilyNumberActivity;
 import com.beautyhealthapp.UserCenter.Activity.GPSSettingActivity;
 import com.beautyhealthapp.UserCenter.Activity.PersonalInfoActivity;
@@ -106,7 +107,14 @@ public class MeFragment extends DataRequestFragment implements OnClickListener{
                 jumpActivity(CallCenterActivity.class,intent);
                 break;
             case R.id.tr_userManger:
-                jumpActivity(UserManagerActivity.class,intent);
+                ISqlHelper iSqlHelper = new SqliteHelper(null,getActivity());
+                List<Object> list = iSqlHelper.Query("com.LocationEntity.UserMessage", null);
+                if (list.size() > 0) {
+                    jumpActivity(UserManagerActivity.class, intent);
+                }else{
+                    intent.putExtra("goto", UserManagerActivity.class.getName());
+                    jumpActivity(LoginActivity.class, intent);
+                }
                 break;
             case R.id.tr_personInfo:
                 IsLoginTip(PersonalInfoActivity.class,intent);

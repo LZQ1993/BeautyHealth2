@@ -90,7 +90,7 @@ public class AddIssueActivity extends DataRequestActivity implements OnItemClick
         parentView = getLayoutInflater().inflate(R.layout.activity_addissue, null);
         setContentView(parentView);
         Notifications.add(currentNotiName);
-        setRightpicID(R.mipmap.menu_save);
+        setRightpicID(R.mipmap.menu_upload);
         initNavBar("添加问题", true, true);
         fetchUIFromLayout();
         setListener();
