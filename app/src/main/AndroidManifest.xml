@@ -130,6 +130,10 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
         <activity
+            android:name=".PersonHealth.Activity.PedometerDataShowActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
             android:name=".PersonHealth.Activity.SugarMeasureActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
@@ -284,7 +288,9 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
+
         <service android:name=".Service.AutoLoginService" />
+        <service android:name="com.beautyhealthapp.PersonHealth.Assistant.StepService" />
         <service android:name="com.amap.api.location.APSService" />
     </application>
 

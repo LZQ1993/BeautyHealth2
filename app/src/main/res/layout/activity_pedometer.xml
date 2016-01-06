@@ -5,6 +5,102 @@
     android:orientation="vertical" >
 
     <!-- 添加导航 -->
+
     <include layout="@layout/activity_navbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <LinearLayout
+                    android:id="@+id/lay_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/usetime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00:00:00"
+                        android:textColor="#FF7B7B7B"
+                        android:textSize="40sp" />
+                </LinearLayout>
+            </FrameLayout>
+            <Button
+                android:id="@+id/btn_stepdatashow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@mipmap/smallfoot" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dip"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:layout_marginTop="20dp"
+        android:layout_weight="3"
+        android:gravity="center" >
+
+        <com.beautyhealthapp.PersonHealth.Assistant.Circlebar
+            android:id="@+id/progress_pedometer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" >
+        </com.beautyhealthapp.PersonHealth.Assistant.Circlebar>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_row"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dip"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:layout_marginTop="20dip"
+        android:gravity="center"
+        android:layout_weight="1" >
+
+        <Button
+            android:id="@+id/start"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dip"
+            android:layout_weight="1"
+            android:background="@drawable/btn_step_start"
+            android:onClick="onClick"
+            android:padding="5dip" />
+
+        <Button
+            android:id="@+id/stop"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:background="@drawable/btn_step_stop"
+            android:onClick="onClick"
+            android:padding="5dip" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -94,7 +94,7 @@ public class SetAlarmActivity extends NavBarActivity implements OnClickListener 
     private void alarmSaveAction() {
         if(tipTitleEdt.getText().toString().equals("")||timeSpanEdt.getText().toString().equals("")
                 ||tipCountEdt.getText().toString().equals("")){
-            ToastUtil.show(getApplicationContext(),"请填写闹钟信息");
+            ToastUtil.show(getApplicationContext(), "请填写闹钟信息");
             return;
         }else {
             if(!(0<Integer.valueOf(timeSpanEdt.getText().toString().trim())
@@ -119,15 +119,16 @@ public class SetAlarmActivity extends NavBarActivity implements OnClickListener 
                 alarmInfoitem.enabled = "1";
                 alarmInfoitem.sampleCount = "0";
                 alarmInfoitem.musicfile = musicPath;
-                alarmInfoitem.alertID = identity;
                 if (alarmInfo != null) {
                     alarmInfoitem.AutoID = alarmInfo.AutoID;
-                   /* String strsqlValue = "enabled='"+alarmInfoitem.enabled+"',timespan='"+alarmInfoitem.timespan+"',"
+                    alarmInfoitem.alertID = alarmInfo.alertID;
+                    String strsqlValue = "enabled='"+alarmInfoitem.enabled+"',timespan='"+alarmInfoitem.timespan+"',"
                             +"count='"+alarmInfoitem.count+"',starttime='"+alarmInfoitem.starttime+"',"
                             +"title='"+alarmInfoitem.title+"',sampleCount='"+alarmInfoitem.sampleCount+"',musicfile='"+alarmInfoitem.musicfile+"'";
-                    iSqlHelper.SQLExec("update AlarmInfo set"+strsqlValue+"where AutoID = "+alarmInfoitem.AutoID);*/
-                    iSqlHelper.Update(alarmInfoitem);
+                    iSqlHelper.SQLExec("update AlarmInfo set" + strsqlValue + "where alertID = '" + alarmInfoitem.alertID+"'");
+                    //iSqlHelper.Update(alarmInfoitem);
                 }else{
+                    alarmInfoitem.alertID = identity;
                     iSqlHelper.Insert(alarmInfoitem);
                 }
                 alarmInfoitem.cancelRepeatAlarm(getApplicationContext(),AlarmActivity.class);
@@ -144,7 +145,7 @@ public class SetAlarmActivity extends NavBarActivity implements OnClickListener 
             if(alarmStopBtn.getText().equals("停用")){
                 alarmInfo.enabled="0";
                 alarmStopBtn.setText("启用");
-                alarmInfo.cancelRepeatAlarm(getApplicationContext(),AlarmActivity.class);
+                alarmInfo.cancelRepeatAlarm(getApplicationContext(), AlarmActivity.class);
                 result="闹钟暂停";
             }else if(alarmStopBtn.getText().equals("启用")){
                 alarmInfo.enabled="1";
@@ -153,8 +154,10 @@ public class SetAlarmActivity extends NavBarActivity implements OnClickListener 
                 alarmInfo.setRepeatAlarm(getApplicationContext(), AlarmActivity.class);
                 result="闹钟已恢复";
             }
-            iSqlHelper.Update(alarmInfo);
+            //iSqlHelper.Update(alarmInfo);
+            iSqlHelper.SQLExec("update AlarmInfo set enabled='"+alarmInfo.enabled+"',sampleCount='"+alarmInfo.sampleCount+"' where alertID='"+alarmInfo.alertID+"'");
             Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+            finish();
         }else{
             Toast.makeText(getApplicationContext(), "您没有设置闹铃",Toast.LENGTH_LONG).show();
         }
@@ -163,8 +166,9 @@ public class SetAlarmActivity extends NavBarActivity implements OnClickListener 
     private void alarmDeleteAction() {
         if (alarmInfo != null) {
             iSqlHelper.CreateTable("com.LocationEntity.AlarmInfo");
-            alarmInfo.cancelRepeatAlarm(getApplicationContext(),AlarmActivity.class);
-            iSqlHelper.Delete(alarmInfo);
+            alarmInfo.cancelRepeatAlarm(getApplicationContext(), AlarmActivity.class);
+           // iSqlHelper.Delete(alarmInfo);
+            iSqlHelper.SQLExec("delete from AlarmInfo where alertID='"+alarmInfo.alertID+"'");
             finish();
         } else {
             Toast.makeText(getApplicationContext(), "您没有设置闹铃", Toast.LENGTH_LONG).show();
