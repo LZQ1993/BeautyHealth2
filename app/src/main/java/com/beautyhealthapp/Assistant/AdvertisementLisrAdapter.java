@@ -26,7 +26,7 @@ public class AdvertisementLisrAdapter extends ArrayAdapter<AdvertisementInfo> {
 		super(context, _listViewId, _advertisementInfoItem);
 		this.context = context;
 		listViewId=_listViewId;
-		this.inflater = LayoutInflater.from(context);;
+		this.inflater = LayoutInflater.from(context);
 	}
 
 	public static class ViewHolder {
@@ -56,8 +56,8 @@ public class AdvertisementLisrAdapter extends ArrayAdapter<AdvertisementInfo> {
 		holder.tv_ad_content.setText(advertisementitem.AdTitle);
 		holder.tv_mc_time.setText(advertisementitem.PublishTime);
 		holder.iv_ad.setImageResource(R.mipmap.menu_download_image);
-		LoadPicTask advertisementlpt = new LoadPicTask(holder.iv_ad);
 		if(advertisementitem.AdImgUrl.length()>0){
+			LoadPicTask advertisementlpt = new LoadPicTask(holder.iv_ad);
 			String webaddrss = NetworkSetInfo.getServiceUrl()+advertisementitem.AdImgUrl.substring(2, advertisementitem.AdImgUrl.length());
 			advertisementlpt.execute(webaddrss);
 		}else{
@@ -65,5 +65,4 @@ public class AdvertisementLisrAdapter extends ArrayAdapter<AdvertisementInfo> {
 		}
 		return convertView;
 	}
-
 }

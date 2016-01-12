@@ -12,6 +12,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.LocationEntity.ServiceState;
 import com.beautyhealthapp.Assistant.MainFragmentAdpater;
 import com.beautyhealthapp.Fragment.MainFragment;
 import com.beautyhealthapp.Fragment.MeFragment;
@@ -19,6 +20,7 @@ import com.beautyhealthapp.Fragment.MembersCenterFragment;
 import com.beautyhealthapp.Fragment.SearchHospitalFragment;
 import com.beautyhealthapp.R;
 import com.beautyhealthapp.Service.AutoLoginService;
+import com.beautyhealthapp.Service.GpsService;
 import com.infrastructure.CWSqliteManager.ISqlHelper;
 import com.infrastructure.CWSqliteManager.SqliteHelper;
 
@@ -80,6 +82,14 @@ public class MainActivity extends FragmentActivity {
                 Toast.makeText(this, "再按一次返回键退出", Toast.LENGTH_SHORT).show();
                 firstBackKeyTime = System.currentTimeMillis();
             } else {
+                ServiceState aService=new ServiceState();
+                //停止这个后台的服务
+                aService.setCurrentServiceStateInDB("0", this);
+                //停止这个后台的服务
+                Intent intentService = new Intent(this,GpsService.class);
+                intentService.setAction(aService.ServiceName);
+                intentService.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                stopService(intentService);
                 ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
                 iSqlHelper.SQLExec("delete from UserMessage");// 删除表中原有的数据，保证只有一条
                 BluetoothAdapter bluetoothAdapter= BluetoothAdapter.getDefaultAdapter();
@@ -97,12 +107,21 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onDestroy() {
+        super.onDestroy();
+        ServiceState aService=new ServiceState();
+        //停止这个后台的服务
+        aService.setCurrentServiceStateInDB("0", this);
+        //停止这个后台的服务
+        Intent intentService = new Intent(this,GpsService.class);
+        intentService.setAction(aService.ServiceName);
+        intentService.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        stopService(intentService);
         ISqlHelper iSqlHelper = new SqliteHelper(null, getApplicationContext());
         iSqlHelper.SQLExec("delete from UserMessage");// 删除表中原有的数据，保证只有一条
         BluetoothAdapter bluetoothAdapter= BluetoothAdapter.getDefaultAdapter();
         bluetoothAdapter.disable();
         Intent service = new Intent(getApplicationContext(), AutoLoginService.class);
         stopService(service);
-        super.onDestroy();
+
     }
 }

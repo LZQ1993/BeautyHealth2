@@ -29,6 +29,7 @@ public class LoadPicTask extends AsyncTask<String, Void, Bitmap> {
         } else {
             resultView.setImageBitmap(bitmap);
         }
+        cancel(true);
     }
 
 

@@ -42,6 +42,7 @@ public class FavorableInfoActivity extends DataRequestActivity {
         tv_publicTime = (TextView) findViewById(R.id.tv_publicTime);
         tv_publicTime.setText(advertisementInfo.PublishTime);
         iv_brieflypic = (ImageView) findViewById(R.id.iv_brieflypic);
+        iv_brieflypic.setImageResource(R.mipmap.hy_info_item_pic);
         String path = advertisementInfo.brieflyImgUrl;
         LoadPicTask advertisementDetiallpt = new LoadPicTask(iv_brieflypic);
         advertisementDetiallpt.setDefaultPic(R.mipmap.hy_info_item_pic);

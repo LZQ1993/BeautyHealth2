@@ -26,7 +26,7 @@ public class SetAlarmActivity extends NavBarActivity implements OnClickListener 
     private ISqlHelper iSqlHelper;
     private Button alarmSaveBtn, alarmStopBtn, alarmDeleteBtn, musicSelectBtn;
     private EditText tipTitleEdt, timeSpanEdt, tipCountEdt;
-    private String musicPath;
+    private String musicPath="";
     private final String tag_intent = "HAVE_ALERMID";
     private final String tag_alarmobj = "ALERMOBJ";
     private AlarmInfo alarmInfo;
@@ -125,7 +125,7 @@ public class SetAlarmActivity extends NavBarActivity implements OnClickListener 
                     String strsqlValue = "enabled='"+alarmInfoitem.enabled+"',timespan='"+alarmInfoitem.timespan+"',"
                             +"count='"+alarmInfoitem.count+"',starttime='"+alarmInfoitem.starttime+"',"
                             +"title='"+alarmInfoitem.title+"',sampleCount='"+alarmInfoitem.sampleCount+"',musicfile='"+alarmInfoitem.musicfile+"'";
-                    iSqlHelper.SQLExec("update AlarmInfo set" + strsqlValue + "where alertID = '" + alarmInfoitem.alertID+"'");
+                    iSqlHelper.SQLExec("update AlarmInfo set " + strsqlValue + "where alertID = '" + alarmInfoitem.alertID+"'");
                     //iSqlHelper.Update(alarmInfoitem);
                 }else{
                     alarmInfoitem.alertID = identity;
